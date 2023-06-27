@@ -254,6 +254,6 @@ export default {
 
 ```
 
-![image-20230627105828987](README.assets/image-20230627105828987.png)
+![image-20230627105828987](./README.assets/image-20230627105828987.png)
 
-![image-20230627105859996](README.assets/image-20230627105859996.png)
+![image-20230627105859996](./README.assets/image-20230627105859996.png)

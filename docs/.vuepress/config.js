@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/',
   title: 'FlowForm 工单系统集成说明文档',
   description: 'Just playing around',
   themeConfig: {

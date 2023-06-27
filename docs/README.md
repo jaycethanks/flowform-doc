@@ -7,11 +7,11 @@ actionText: 快速集成 →
 actionLink: /Integration/
 features:
 - title: 简洁至上
-  details: 啥也不用干
+  details: 简洁
 - title: 快速集成
-  details: 填个链接就好了
+  details: 填个链接
 - title: 高效率
-  details: 反正就是高效就是了
+  details: 高效
 footer: Laison Tech
 ---
 
