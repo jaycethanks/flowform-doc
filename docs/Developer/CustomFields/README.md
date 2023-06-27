@@ -1,11 +1,6 @@
 # 自定义组件 - 普通字段录入组件
 
-所有的自定义组件，都暴露在: `src/CusComponents4FormDesign` 开发目录
 
-创建一个自定义组件大致步骤：
-1. mkdir src/CusComponents4FormDesign/CompomentName/
-2. touch src/CusComponents4FormDesign/CompomentName/CompomentName.vue index.js
-3. 在 src/CusComponents4FormDesign/index.js 中引入创建的组件，并导出
 
 ## 定义普通字段录入组件示例
 
@@ -15,14 +10,6 @@
 mkdir src/CusComponents4FormDesign/CustomFields
 touch src/CusComponents4FormDesign/CustomFields/CustomFields.vue index.js
 ```
-
-**对于实际的自定义组件， 默认的将会有 `value` 和 `disabled` 两个 props 值。 所有的组件需要满足 能够被 `v-model` 指令绑定。** 
-**组件的默认传入值为 `value`， 默认的传出事件名为 `change`。**
-**对于需要在流程结点控制权限的自定义字段， 你必须定义 `data.exposeFields` 对象**， 这个对象中， 有三个属性：
-
-1. `value` : 字段绑定值
-2. `disabled` ： 字段是否可编辑
-3. `hidden` ： 字段是否可见
 
 ### step2: 导出和引入 组件
 
@@ -41,6 +28,8 @@ export default {
 };
 ```
 
+> 导出字段详见 [自定义组件导出字段说明](/Developer/CustomCompExportConfig/)
+
 ```js
 // src/CusComponents4FormDesign/index.js 导入到出口文件，并统一导出
 import CustomFields from './CustomFields';
@@ -54,6 +43,14 @@ export default cusComps;
 
 
 ### step3: 开发并测试 自定义组件
+
+**对于实际的自定义组件， 默认的将会有 `value` 和 `disabled` 两个 props 值。 所有的组件需要满足 能够被 `v-model` 指令绑定。** 
+**组件的默认传入值为 `value`， 默认的传出事件名为 `change`。**
+**对于需要在流程结点控制权限的自定义字段， 你必须定义 `data.exposeFields` 对象**， 这个对象中， 有三个属性：
+
+1. `value` : 字段绑定值
+2. `disabled` ： 字段是否可编辑
+3. `hidden` ： 字段是否可见
 
 你需要分别监听 value, 和 exposeFields, 去触发初始值 set， 以及字段值变化，更新传出值逻辑。 
 
@@ -165,6 +162,12 @@ export default {
 > 3. 在向外 emit 更新值的时候， exposeFields 这个 watcher, 需要开启 immediate:true, 否则, 当组件未手动触发时，可能会没有初始值
 >
 > 4. 该组件的值绑定类型， 就是 emit 出去的值类型
+>
+> 5. `hidden` 值要对应的绑定到 各个字段的 `v-if` 指令，用于控制是否可见
+>
+> 6. `disabled` 值的绑定则同时需要 `props.disable || exposedFields.xxx.disable`,  因为 `prop.disable` 控制了全局表单的可编辑状态， `exposedFields.xxx.disable`则被审批结点所控制。
+>
+> > 这些规则在后面的自定义表单组件同样适用
 
 这样一个自定义组件就完成了。
 

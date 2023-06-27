@@ -4,7 +4,7 @@
 
 | 页面名         | base path                       |
 | -------------- | ------------------------------- |
-| 流程设计与发布 | '/platform/flowformManagement'  |
+| 模板与流程管理 | '/platform/flowformManagement'  |
 | 我的发起       | '/platform/workorder/myapply'   |
 | 我的代办       | '/platform/workorder/mytodo'    |
 | 我的已办       | '/platform/workorder/mydone'    |
@@ -17,32 +17,50 @@
 
 ## URL 拼接
 
-它们都需要一下特定 URL 参数， URL 分为四个部分:
+它们都需要以下特定 URL 参数， URL 分为四个部分:
 
-1. 工单平台的部署 IP + 端口
+1. **`FLOWFORM_PLATFORM_ADDRESS` (工单平台的部署 IP + 端口)**
 
    > 工单平台部署的地址， 如果是非复杂系统， 这里可以直接写在 `.env` 环境变量中， 例如本例中 将该地址存储为 `VUE_APP_FLOWFORM_ADDRESS` 环境变量
 
-2. 必传 query 参数
+2. **basePath**
+
+   指定页面的 基本路由
+
+3. **必传 query 参数**
 
    - `uniTenantId` :  统一租户 ID
    - `bizToken`: 业务系统 授权 Token
 
-3. 可选 query 参数
+4. **可选 query 参数**
 
-   - `lang` ; 业务系统当前语言环境
-
-4.  basePath
-
-   指定页面的 基本路由
+   - `lang` ; 业务系统当前语言环境(不传递时，默认为 英文) 
+   
+     > 工单系统本地语言支持 中英法葡萄牙以及阿拉伯五种语言， 对应的标识为：`[zh, en, fr, pt, ar]`
+   
+   - `recent` : 过滤查询条件 - 时间范围的默认值， 从现在开始，到起始时间 的间隔数(number 类型， 默认不填写为3, 时间单位为月)
+   
+   - `statsLevel` : 
+   
+     用于统计页面，控制过滤结果的权限 ， 取值范围 [1,2,3] ， 默认为 3。
+   
+     * `1` : 起人 （发起人、查看全部的人)
+   
+     * `2` : 参与人 （发起人、参与人、查看全部的人)
+   
+     * `3` : 全部   (发起人、发起人部门及其子部门、参与人、查看全部的人)
 
 **一个示例的 URL 如下：**
 
-`${FLOWFORM_PLATFORM_ADDRESS}${this.basePath}?uniTenantId=${UNI_TENANT_ID}&bizToken=${token}&lang=${lang}`;
+```bash
+${FLOWFORM_PLATFORM_ADDRESS}${this.basePath}?uniTenantId=${UNI_TENANT_ID}&bizToken=${token}&lang=${lang}
+```
 
 
 
-以 `流程设计与发布` 页面为例:  某个业务系统中， 可以这样去集成:
+
+
+以 `模板与流程管理` 页面为例:  某个业务系统中， 可以这样去集成:
 
 ```vue
 <template>
@@ -103,6 +121,3 @@ export default {
 
 ```
 
-
-
-这些 URL 中的拼接参数将在后文中详细说明， 他们基本是一致的。 
