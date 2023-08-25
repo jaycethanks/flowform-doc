@@ -1,17 +1,20 @@
 {
-  "name": "vuepress-demo",
+  "name": "flowform-doc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "vuepress build docs",
+    "export-pdf": "press-export-pdf export ./docs/.vuepress/export/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@condorhero/vuepress-plugin-export-pdf": "^3.0.1",
+    "esbuild": "^0.18.11",
     "vuepress": "^1.9.9"
   }
 }

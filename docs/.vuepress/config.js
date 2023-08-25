@@ -1,5 +1,6 @@
 module.exports = {
-  base: '/',
+  base: './',
+  plugins: ['@snowdog/vuepress-plugin-pdf-export'],
   title: 'FlowForm 工单系统集成说明文档',
   description: 'Just playing around',
   themeConfig: {
@@ -32,7 +33,8 @@ module.exports = {
         children: [
           'Developer/CustomFields/',
           'Developer/CustomForm/',
-          'Developer/CustomCompExportConfig/'
+          'Developer/CustomCompExportConfig/',
+          'Developer/Language/'
         ]
       },
     ]
